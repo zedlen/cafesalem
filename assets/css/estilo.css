@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Stalemate');
+
+   /* 
+	font-family: 'Eater', cursive;
+  	font-family: 'Fredericka the Great', cursive;
+	font-family: 'IM Fell English SC', serif;    
+ 	font-family: 'Jolly Lodger', cursive;
+   	font-family: 'Kranky', cursive;
+    font-family: 'Stalemate', cursive;  
+
+ */
+body {
+ 	background-image: url('../images/fondo.jpg');
+}
+
+#encabezado{
+	background-image: url('../images/pintura.jpg');
+	background-size: cover;
+	height: 5cm;
+}
+
+*{
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+h1, h2{
+	font-family: 'Stalemate', cursive; 
+}
+
+h1{
+	color: white;
+	margin-top: -15px;   	
+    font-size: 2cm;
+}
+
+h2{
+	font-size: 40px;
+}
+
+#bebidas, #alimentos, #mesas{
+	background-color: rgba(0, 0, 0, 0.3);
+	color: white;
+	padding-top: 10px;
+	padding-bottom: 15px;
+}
+
+#mesas{
+	font-size: 15px;
+}
+
+#ticket{
+	background-image: url('../images/nota.jpg');
+	background-size: cover;
+	height: 13cm;
+	padding-left: 25px;
+	padding-right: 25px;
+	font-size: 18px;
+}
+
+#nota{
+	margin-top: 10px;
+	padding: 2px;
+	overflow: scroll;
+	height: 8.7cm;
+}
+
+#sel{
+	position: relative;
+	right: 14px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#cuenta{
+	font-size: 15px;
+}
+
+ul{
+	padding-left: 15px;
+}
+
+#imprimir{
+	position: absolute;
+	bottom: 60px;
+	right: 50px;
+}
+
+.botones {
+  color: #242220;
+  font-size: 15px;
+  background: #cda56d;
+  padding: 10px 20px 10px 20px;
+  border: solid #664a2d 1px;
+  text-decoration: none;
+}
+
+.botones:hover {
+  background: #de893e;
+  text-decoration: none;
+  color: white;
+}
+
+table{
+	width: 6cm;
+	font-size: 15px;
+}
+footer{
+	color: white;
+}
