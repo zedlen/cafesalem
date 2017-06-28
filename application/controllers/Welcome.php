@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+define('API', 'http://localhost/caffeeSalem/index.php/api/');
 class Welcome extends CI_Controller {
 
 	/**
@@ -22,5 +22,18 @@ class Welcome extends CI_Controller {
 	{
 
 		$this->load->view('coffee/index');
+	}
+	public function apiConecction()
+	{
+		$params=$this->input->post();
+		$url=$params["url"];
+		unset($params["url"]);
+		if (sizeof($params)==0) {
+			$request=$this->curl->sendGetMethod(API.$url);
+		}
+		else{
+			$request=$this->curl->sendGetMethod(API.$url,$params);	
+		}
+       	echo "$request";           
 	}
 }

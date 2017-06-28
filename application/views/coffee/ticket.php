@@ -21,10 +21,17 @@
 
       <div id="cuenta">
         <table>
-          <tr>
-            <td>Producto</td>
-            <td>$</td>
-          </tr>
+          <thead>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>$</th>
+          </thead>
+          <tbody id="ticket_datail"></tbody>
+          <tfoot>
+            <td>TOTAL</td>
+            <td>&nbsp;</td>
+            <td id="total_ticket"></td>
+          </tfoot>
 
         </table>
        

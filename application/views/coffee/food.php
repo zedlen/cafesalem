@@ -17,7 +17,7 @@
       //echo "$request";   
       $request=json_decode($request);
       foreach ($request->food as $key => $value) {
-            echo "<button type='button' class='btn btn-lg botones foods food_category_$value->Categoria'>$value->Nombre</button>";
+            echo "<button type='button' producto_id='$value->idProducto' id='food_$value->idProducto' obj_name='$value->Nombre' class='btn btn-lg botones foods food_category_$value->Categoria' prize='$value->Precio'>$value->Nombre</button>";
       }   
      ?>    
 </div>

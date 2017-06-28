@@ -4,6 +4,8 @@
     <title>SALEM</title>  
     <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet" media="screen"> 
     <link href="<?php echo base_url();?>assets/css/estilo.css" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url();?>assets/js/alertifyjs/css/alertify.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url();?>assets/js/alertifyjs/css/themes/default.min.css" rel="stylesheet" media="screen">
     
   </head> 
   <body>

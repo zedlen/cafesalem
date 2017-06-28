@@ -18,18 +18,18 @@
           if ($request->status) {
             foreach ($request->drinks as $key => $value) {
               ?>
-                <div class="btn-group drinks drink_category_<?php echo "$value->Categoria";?>">
-                  <button type="button" class="btn  btn-lg dropdown-toggle botones" data-toggle="dropdown">
+                <!--<div class="btn-group drinks drink_category_<?php echo "$value->Categoria";?>">-->
+                  <button type="button" producto_id='<?php echo $value->idProducto;?>' id="drink_<?php echo $value->idProducto;?>" obj_name=' <?php echo "$value->Nombre";?>' class="btn  btn-lg botones btn-group drinks drink_category_<?php echo "$value->Categoria";?>" prize="<?php echo "$value->Precio";?>" data-toggle="dropdown">
                     <?php echo "$value->Nombre";?>
-                  <span class="caret"></span>
-                  </button>
+                  <!--<span class="caret"></span>-->
+                  </button><!--
                   <ul class="dropdown-menu">
                     <li><a href="#">Chico</a></li>
                     <li><a href="#">Mediano</a></li>
                     <li><a href="#">Grande</a></li>
                     
                   </ul>
-                </div>
+                </div>-->
               <?php
             }   
           }
