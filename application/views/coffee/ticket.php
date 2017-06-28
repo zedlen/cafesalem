@@ -4,14 +4,17 @@
       Atendió:
     </div>
     <div class="col-md-8" id="sel">
-      <select requiered class="form-control input-sm">
-        <option value="" disabled="">--Seleccione quien atendió--</option>
-        <option value="1">mesero1</option>
-        <option value="2">mesero2</option>
-        <option value="3">mesero3</option>
-        <option value="4">mesero4</option>
-        <option value="5">mesero5</option>
-      </select>
+    <?php
+      $cat=$this->curl->sendGetMethod(base_url().'/index.php/api/general/getEmployees');
+      //echo "$cat";   
+      $cat=json_decode($cat);
+      $select="<select id='employee_select' class='form_control select_category drink'>";
+      foreach ($cat->employees as $key => $value) {
+        $select=$select."<option value='$value->idEmpleado'>$value->Nombre $value->ApellidoPaterno $value->ApellidoMaterno</option>";
+      }
+      $select=$select."</select>";
+      echo "$select";
+    ?>      
     </div>
   </div>
 
@@ -19,8 +22,8 @@
     <div id="nota">
     Cuenta:
 
-      <div id="cuenta">
-        <table>
+      <div id="cuenta" class="table-responsive">
+        <table class="table">
           <thead>
             <th>Producto</th>
             <th>Cantidad</th>

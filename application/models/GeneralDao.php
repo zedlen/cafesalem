@@ -14,5 +14,10 @@ class GeneralDao extends CI_Model
 		$result=$this->db->get('Mesa');
 		return $result->result();
 	}
+	public function getEmployees($value='')
+	{
+		$result=$this->db->get('Empleado');
+		return $result->result();
+	}
 	
 }

@@ -69,7 +69,7 @@ class TicketDao extends CI_Model
     	}
     	
     }	
-    public function addTicketDetail($table_id=0,$producto,$total,$cant)
+    public function editTicket($table_id=0,$producto,$total,$cant)
     {
     	if ($table_id!=0) {
     		$ticket=$this->getOpenTicket($table_id);

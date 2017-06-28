@@ -40,5 +40,18 @@ class General extends REST_Controller {
                 ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
+    public function getEmployees_get($value='')
+    {
+        $result=$this->dao->getEmployees();
+        if ($result!=null) {
+            $answer = array('status' => TRUE,'employees'=>$result );
+            $this->response($answer, REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                    'status' => FALSE,
+                    'message' => 'No data were found'
+                ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
     
 }
