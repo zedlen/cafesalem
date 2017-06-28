@@ -63,7 +63,7 @@ class TicketDao extends CI_Model
    	{
     	if ($table_id!=0) {
     		$this->db->where(array('Mesa'=>$table_id,'Status'=>1));
-    		return $this->db->update('Ticket',array('Status'=>0,'Empleado'=>$empleado,'Total'=>$total,'FormaPago'=>$formaPago));
+    		return $this->db->update('Ticket',array('Status'=>0,'Empleado'=>$empleado,'Total'=>$total,'FormaPago'=>$formaPago,'Fecha'=>date("Y-m-d H:i:s")));
     	} else {
     		return false;
     	}
