@@ -4,7 +4,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Admin Salem Witch</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url();?>assets/admin/favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="<?php echo base_url();?>assets/admin/css/fontcss.css" rel="stylesheet" type="text/css">
@@ -27,6 +27,8 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url();?>assets/admin/css/themes/all-themes.css" rel="stylesheet" />
+
+    <link href="<?php echo base_url();?>assets/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 </head>
 
 <body class="theme-red">

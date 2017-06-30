@@ -53,5 +53,173 @@ class General extends REST_Controller {
                 ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
-    
+    public function getCategories_get($value='')
+    {
+        $result=$this->dao->getCategories();
+        if ($result!=null) {
+            $answer = array('status' => TRUE,'categories'=>$result );
+            $this->response($answer, REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                    'status' => FALSE,
+                    'message' => 'No data were found'
+                ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+    public function getProducts_get($value='')
+    {
+        $result=$this->dao->getProducts();
+        if ($result!=null) {
+            $answer = array('status' => TRUE,'products'=>$result );
+            $this->response($answer, REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                    'status' => FALSE,
+                    'message' => 'No data were found'
+                ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+    public function addCategory_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->addCategory($params);
+        if ($result) {
+            $answer = array('status' => TRUE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function deleteCategory_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->deleteCategory($params["idCategoria"]);
+        if ($result) {
+            $answer = array('status' => TRUE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function editCategory_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->editCategory($params);
+        if ($result) {
+            $answer = array('status' => TRUE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function addProducto_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->addProducto($params);
+        if ($result) {
+            $answer = array('status' => TRUE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function deleteProductory_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->deleteProductory($params["idProducto"]);
+        if ($result) {
+            $answer = array('status' => TRUE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function editProducto_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->editProducto($params);
+        if ($result) {
+            $answer = array('status' => TRUE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function getDailyReport_get()
+    {
+        $result=$this->dao->getDailyReport();
+        if ($result!=null) {
+            $answer = array('status' => TRUE,
+                            'tickets'=>$result );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function getMonthlyReport_get()
+    {
+        $result=$this->dao->getMonthlyReport();
+        if ($result!=null) {
+            $answer = array('status' => TRUE,
+                            'tickets'=>$result );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function getAnnualReport_get()
+    {
+        $result=$this->dao->getAnnualReport();
+        if ($result!=null) {
+            $answer = array('status' => TRUE,
+                            'tickets'=>$result );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function getSpecificReport_get()
+    {
+        $params=$this->input->get();
+        if (!isset($params["start"])) {
+            $answer = array('status' => FALSE,'error'=>'Falta fecha de inicio' );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            if (!isset($params["end"])) {
+                $answer = array('status' => FALSE,'error'=>'Falta fecha de fin' );
+                $this->response($answer,REST_Controller::HTTP_OK);
+            } else {
+                $result=$this->dao->getSpecificReport($params);
+                if ($result!=null) {
+                    $answer = array('status' => TRUE,
+                                    'tickets'=>$result );
+                    $this->response($answer,REST_Controller::HTTP_OK);
+                } else {
+                    $answer = array('status' => FALSE );
+                    $this->response($answer,REST_Controller::HTTP_OK);
+                }
+            }
+            
+        }
+        
+        
+    }
 }

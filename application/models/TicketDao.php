@@ -61,6 +61,7 @@ class TicketDao extends CI_Model
     }
     public function closeTicket($table_id=0,$empleado,$total,$formaPago)
    	{
+   		date_default_timezone_set('America/Mexico_City');
     	if ($table_id!=0) {
     		$this->db->where(array('Mesa'=>$table_id,'Status'=>1));
     		return $this->db->update('Ticket',array('Status'=>0,'Empleado'=>$empleado,'Total'=>$total,'FormaPago'=>$formaPago,'Fecha'=>date("Y-m-d H:i:s")));

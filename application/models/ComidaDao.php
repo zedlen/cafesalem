@@ -11,16 +11,18 @@ class ComidaDao extends CI_Model
 	}
 	public function getAllFood($value='')
 	{
-		$names = array(8,9,10,11,12);
-		$this->db->where_in('Categoria', $names);
+		$this->db->where(array('Comida'=>1));
+		$this->db->order_by('Nombre');
 		$result=$this->db->get('Producto');
 		return $result->result();
 	}
 	public function getAllFoodCategories($value='')
 	{
-		$names = array(8,9,10,11,12);
-		$this->db->where_in('idCategoria', $names);
-		$result=$this->db->get('Categoria');
+		$this->db->select('c.Nombre,c.idCategoria');
+		$this->db->where(array('p.Comida'=>1));
+		$this->db->join('Producto p','p.Categoria=c.idCategoria');
+		$this->db->group_by('c.idCategoria');
+		$result=$this->db->get('Categoria c');
 		return $result->result();
 	}
 }

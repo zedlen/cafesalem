@@ -10,21 +10,57 @@
             </div>
             <!-- #User Info -->
             <!-- Menu -->
+            <?php
+                $index="";
+                $categories="";
+                $products="";
+                $employees="";
+                switch ($maincontent) {
+                    case 'index':
+                        $index="class='active'";
+                        break;
+                    case 'Category':
+                        $categories="class='active'";
+                        break;
+                    case 'Employee':
+                        $employees="class='active'";
+                        break;
+                    case 'Product':
+                        $products="class='active'";
+                        break;
+                    
+                    default:
+                        # code...
+                        break;
+                }
+            ?>
             <div class="menu">
                 <ul class="list">
-                    <li class="header">MAIN NAVIGATION</li>
-                    <li class="active">
-                        <a href="index.html">
+                    <li class="header">MENU</li>
+                    <li <?php echo $index;?>>
+                        <a href="<?php echo base_url();?>index.php/Admin">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="pages/typography.html">
-                            <i class="material-icons">text_fields</i>
-                            <span>Typography</span>
+                    <li <?php echo $categories;?>>
+                        <a href="<?php echo base_url();?>index.php/Admin/index/Category">
+                            <i class="material-icons">library_books</i>
+                            <span>Categorias</span>
                         </a>
-                    </li>                   
+                    </li> 
+                    <li <?php echo $products;?>>
+                        <a href="<?php echo base_url();?>index.php/Admin/index/Product">
+                            <i class="material-icons">shopping_basket</i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li <?php echo $employees;?>>
+                        <a href="<?php echo base_url();?>index.php/Admin/index/Employee">
+                            <i class="material-icons">recent_actors</i>
+                            <span>Empleados</span>
+                        </a>
+                    </li> 
                 </ul>
             </div>
             <!-- #Menu -->
