@@ -46,11 +46,22 @@
     <script src="<?php echo base_url();?>assets/admin/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="<?php echo base_url();?>assets/admin/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="<?php echo base_url();?>assets/admin/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+    <script src="<?php echo base_url();?>assets/js/alertifyjs/alertify.min.js"></script>  
+
+    <script src="<?php echo base_url();?>assets/admin/plugins/momentjs/moment.js"></script>
+
+    <script src="<?php echo base_url();?>assets/admin/plugins/jquery-validation/jquery.validate.js"></script>  
     
     <!-- Custom Js -->
     <script src="<?php echo base_url();?>assets/admin/js/admin.js"></script>
-    <script src="<?php echo base_url();?>assets/admin/js/pages/index.js"></script>
-
+    <?php    
+        $dir=(string)$_SERVER['DOCUMENT_ROOT']; 
+        $dir =$dir."/caffeeSalem/assets/admin/js/pages/".$maincontent.".js";
+        if (file_exists($dir)) {
+            echo "<script src='".base_url()."assets/admin/js/pages/".$maincontent.".js'></script>";
+        }
+    ?>
 </body>
 
 </html>

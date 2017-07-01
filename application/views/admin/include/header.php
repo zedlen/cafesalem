@@ -29,9 +29,63 @@
     <link href="<?php echo base_url();?>assets/admin/css/themes/all-themes.css" rel="stylesheet" />
 
     <link href="<?php echo base_url();?>assets/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    
+    <link href="<?php echo base_url();?>assets/js/alertifyjs/css/alertify.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url();?>assets/js/alertifyjs/css/themes/default.min.css" rel="stylesheet" media="screen">
+
+    
+    <!-- Bootstrap Select Css -->
+    <link href="<?php echo base_url();?>assets/admin/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 </head>
 
 <body class="theme-red">
+    <!---Loading modal-->
+
+
+    <div class="modal fade" id="loading">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">      
+          <div class="modal-body">
+            <div align="center" >
+                Guardando ...<br>
+                <div class="preloader pl-size-xl" >
+                    <div class="spinner-layer">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="deleting">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">      
+          <div class="modal-body">
+            <div align="center" >
+                Borrando ...<br>
+                <div class="preloader pl-size-xl" >
+                    <div class="spinner-layer">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <!--#END# Loading modal-->
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">

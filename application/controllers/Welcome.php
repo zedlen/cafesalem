@@ -27,12 +27,12 @@ class Welcome extends CI_Controller {
 	{
 		$params=$this->input->post();
 		$url=$params["url"];
-		unset($params["url"]);
+		unset($params["url"]);		
 		if (sizeof($params)==0) {
 			$request=$this->curl->sendGetMethod(API.$url);
 		}
-		else{
-			$request=$this->curl->sendGetMethod(API.$url,$params);	
+		else{						
+			$request=$this->curl->sendGetMethod(API.$url."?".http_build_query($params,'\n'));
 		}
        	echo "$request";           
 	}

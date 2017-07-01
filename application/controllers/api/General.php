@@ -83,8 +83,8 @@ class General extends REST_Controller {
     {
         $params=$this->input->get();
         $result=$this->dao->addCategory($params);
-        if ($result) {
-            $answer = array('status' => TRUE );
+        if ($result!=false) {
+            $answer = array('status' => TRUE, 'id'=>$result );
             $this->response($answer,REST_Controller::HTTP_OK);
         } else {
             $answer = array('status' => FALSE );
@@ -108,7 +108,7 @@ class General extends REST_Controller {
     public function editCategory_get()
     {
         $params=$this->input->get();
-        $result=$this->dao->editCategory($params);
+        $result=$this->dao->updateCategory($params);
         if ($result) {
             $answer = array('status' => TRUE );
             $this->response($answer,REST_Controller::HTTP_OK);
@@ -118,10 +118,23 @@ class General extends REST_Controller {
         }
         
     }
-    public function addProducto_get()
+    public function addProduct_get()
     {
         $params=$this->input->get();
-        $result=$this->dao->addProducto($params);
+        $result=$this->dao->addProduct($params);
+        if ($result) {
+            $answer = array('status' => TRUE, 'id'=>$result );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function deleteProduct_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->deleteProduct($params["idProducto"]);
         if ($result) {
             $answer = array('status' => TRUE );
             $this->response($answer,REST_Controller::HTTP_OK);
@@ -131,10 +144,10 @@ class General extends REST_Controller {
         }
         
     }
-    public function deleteProductory_get()
+    public function editProduct_get()
     {
-        $params=$this->input->get();
-        $result=$this->dao->deleteProductory($params["idProducto"]);
+        $params=$this->input->get();        
+        $result=$this->dao->updateProduct($params);
         if ($result) {
             $answer = array('status' => TRUE );
             $this->response($answer,REST_Controller::HTTP_OK);
@@ -144,10 +157,36 @@ class General extends REST_Controller {
         }
         
     }
-    public function editProducto_get()
+    public function addEmployee_get()
     {
         $params=$this->input->get();
-        $result=$this->dao->editProducto($params);
+        $result=$this->dao->addEmployee($params);
+        if ($result) {
+            $answer = array('status' => TRUE, 'id'=>$result );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function deleteEmployee_get()
+    {
+        $params=$this->input->get();
+        $result=$this->dao->deleteEmployee($params["idEmpleado"]);
+        if ($result) {
+            $answer = array('status' => TRUE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        } else {
+            $answer = array('status' => FALSE );
+            $this->response($answer,REST_Controller::HTTP_OK);
+        }
+        
+    }
+    public function editEmployee_get()
+    {
+        $params=$this->input->get();        
+        $result=$this->dao->updateEmployee($params);
         if ($result) {
             $answer = array('status' => TRUE );
             $this->response($answer,REST_Controller::HTTP_OK);

@@ -14,24 +14,25 @@
               $total_products=0;
               $employee_array=array();
               $product_array=array();   
-
-              foreach ($today->tickets as $key => $value) {
-                   $today_sold=$today_sold+$value->Total;
-                   $employee_name=str_replace(" ", "", $value->Empleado);
-                   if (isset($employee_array[$employee_name])) {
-                       $employee_array[$employee_name]=$employee_array[$employee_name]+1;
-                   } else {
-                      $employee_array[$employee_name]=0;
-                   }                   
-                   foreach ($value->Detalle as $index => $obj) {
-                        $product_name=str_replace(" ", "", $obj->Producto);
-                        if (isset($product_array[$product_name])) {
-                            $product_array[$product_name]=$product_array[$product_name]+1;
-                        } else {
-                            $product_array[$product_name]=0;
-                        }                       
-                        $total_products=$total_products+$obj->Cantidad;
-                   }
+              if (isset($today->tickets)) {
+                  foreach ($today->tickets as $key => $value) {
+                       $today_sold=$today_sold+$value->Total;
+                       $employee_name=str_replace(" ", "", $value->Empleado);
+                       if (isset($employee_array[$employee_name])) {
+                           $employee_array[$employee_name]=$employee_array[$employee_name]+1;
+                       } else {
+                          $employee_array[$employee_name]=0;
+                       }
+                       foreach ($value->Detalle as $index => $obj) {
+                            $product_name=str_replace(" ", "", $obj->Producto);
+                            if (isset($product_array[$product_name])) {
+                                $product_array[$product_name]=$product_array[$product_name]+(int)$obj->Cantidad;
+                            } else {                             
+                                $product_array[$product_name]=(int)$obj->Cantidad;
+                            }                       
+                            $total_products=$total_products+$obj->Cantidad;
+                       }
+                  }
               }
             ?>
 
@@ -68,11 +69,13 @@
                             <div class="text">+ Vendido</div>
                             <div>
                                 <?php 
-                                    $producto=array_search(max($product_array),$product_array);                                    
-                                    foreach ($products->products as $key => $value) {                                    
-                                        if ($producto==str_replace(" ", "", $value->Nombre)) {
-                                            echo "$value->Nombre";
-                                            break;
+                                    if (sizeof($product_array)>0) {
+                                        $producto=array_search(max($product_array),$product_array);                                    
+                                        foreach ($products->products as $key => $value) {                                    
+                                            if ($producto==str_replace(" ", "", $value->Nombre)) {
+                                                echo "$value->Nombre";
+                                                break;
+                                            }
                                         }
                                     }
                                 ?>
@@ -89,11 +92,13 @@
                             <div class="text">Mejor vendedor</div>
                             <div class="number">
                                 <?php 
-                                    $empleado=array_search(max($employee_array),$employee_array);                                    
-                                    foreach ($employees->employees as $key => $value) {                                        
-                                        if ($empleado==$value->Nombre.$value->ApellidoPaterno.$value->ApellidoMaterno) {
-                                            echo "$value->Nombre";
-                                            break;
+                                    if (sizeof($employee_array)>0) {
+                                        $empleado=array_search(max($employee_array),$employee_array);                                    
+                                        foreach ($employees->employees as $key => $value) {                                        
+                                            if ($empleado==$value->Nombre.$value->ApellidoPaterno.$value->ApellidoMaterno) {
+                                                echo "$value->Nombre";
+                                                break;
+                                            }
                                         }
                                     }
                                 ?>
@@ -121,5 +126,8 @@
                 </div>              
                 
             </div>
-        </div>
+        </div>       
     </section>
+
+           
+    
