@@ -19,14 +19,20 @@
                           $cat=$this->curl->sendGetMethod(base_url().'/index.php/api/general/getEmployees');
                           //echo "$cat";   
                           $cat=json_decode($cat);                      
-                          foreach ($cat->employees as $key => $value) {                          
+                          foreach ($cat->employees as $key => $value) {
+                            if ($value->Genero=="M") {
+                                $genero="Masculino";
+                            } else {
+                                $genero="Femenino";
+                            }
+                                                                                
                                 echo "<tr id='row_empleado_$value->idEmpleado'>
                                         <td id='nombre_$value->idEmpleado'>$value->Nombre</td>
                                         <td id='aPaterno_$value->idEmpleado'>$value->ApellidoPaterno</td>
                                         <td id='aMaterno_$value->idEmpleado'>$value->ApellidoMaterno</td>
                                         <td id='curp_$value->idEmpleado'>$value->curp</td>
                                         <td id='edad_$value->idEmpleado'>$value->Edad</td>
-                                        <td id='genero_$value->idEmpleado'>$value->Genero</td>
+                                        <td id='genero_$value->idEmpleado'>$genero</td>
                                         <td id='direccion_$value->idEmpleado'>$value->Direccion</td>
                                         <td>
                                         <button type='button' class='btn btn-primary btn-circle waves-effect waves-circle waves-float' onclick='addEditEmployee($value->idEmpleado);'>
@@ -80,7 +86,7 @@
             <label for="aMaterno">Apellido Materno</label>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" id="aPaterno" name="apellidoMaterno" class="form-control" placeholder="Lopez" required="required">
+                    <input type="text" id="aMaterno" name="apellidoMaterno" class="form-control" placeholder="Lopez" required="required">
                 </div>
             </div>
             <label for="curp">CURP</label>
@@ -98,7 +104,10 @@
             <label for="genero">Genero</label>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" id="genero" name="Genero" class="form-control" placeholder="Masculino,Femenino..">
+                    <select id="genero" name="Genero" class="form-control" required="required">
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
                 </div>
             </div>
             <label for="direccion">Dirección</label>

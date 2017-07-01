@@ -14,12 +14,18 @@ $('#form_validation').validate({
 function addEditEmployee(id) {
 	id_empleado=id
 	if (id!=0) {	
+		var genero=''
+		if ($("#genero_"+id).html()=='Femenino') {
+			genero='F'
+		} else {
+			genero='M'
+		}
 		$('#employeeModal').modal('show')
 		$("#nombre").val($("#nombre_"+id).html())
 		$("#aPaterno").val($("#aPaterno_"+id).html())
 		$("#aMaterno").val($("#aMaterno_"+id).html())
 		$('#curp').val($("#curp_"+id).html())
-		$("#genero").val($("#genero_"+id).html())
+		$("#genero").val(genero).change()
 		$("#direccion").val($("#direccion_"+id).html())
 	}
 	else{
@@ -28,7 +34,7 @@ function addEditEmployee(id) {
 		$("#aPaterno").val('')
 		$("#aMaterno").val('')
 		$('#curp').val('')
-		$("#genero").val('')
+		$("#genero").val('').change()
 		$("#direccion").val('')
 	}
 }
@@ -56,7 +62,8 @@ function saveChangesEmployee() {
 				  ApellidoMaterno:$("#aMaterno").val(),
 				  curp:$("#curp").val(),
 				  Genero:$("#genero").val(),
-				  Direccion:$("#direccion").val()
+				  Direccion:$("#direccion").val(),
+				  Edad:$("#edad").val()
 				},
 				dataType: "json", 
 				success: function(response)
@@ -69,7 +76,7 @@ function saveChangesEmployee() {
 						$("#aMaterno_"+id_empleado).html($("#aMaterno").val())
 						$('#curp_'+id_empleado).html($("#curp").val())
 						$('#edad_'+id_empleado).html($("#edad").val())
-						$("#genero_"+id_empleado).html($("#genero").val())
+						$("#genero_"+id_empleado).html($("#genero :selected").text())
 						$("#direccion_"+id_empleado).html($("#direccion").val())
 					}
 					else{
@@ -98,7 +105,8 @@ function saveChangesEmployee() {
 				  ApellidoMaterno:$("#aMaterno").val(),
 				  curp:$("#curp").val(),
 				  Genero:$("#genero").val(),
-				  Direccion:$("#direccion").val()
+				  Direccion:$("#direccion").val(),
+				  Edad:$("#edad").val()
 				},
 				dataType: "json", 
 				success: function(response)
@@ -112,7 +120,7 @@ function saveChangesEmployee() {
 														"<td id='aMaterno_"+response.id+"'>"+$("#aMaterno").val()+"</td>"+
 														"<td id='curp_"+response.id+"'>"+$("#curp").val()+"</td>"+
 														"<td id='edad_"+response.id+"'>"+$("#edad").val()+"</td>"+
-														"<td id='genero_"+response.id+"'>"+$("#genero").val()+"</td>"+
+														"<td id='genero_"+response.id+"'>"+$("#genero :selected").text()+"</td>"+
 														"<td id='direccion_"+response.id+"'>"+$("#direccion").val()+"</td>"+
 														"<td>"+
 														"<button type='button' class='btn btn-primary btn-circle waves-effect waves-circle waves-float' onclick='addEditProduct("+response.id+");'>"+

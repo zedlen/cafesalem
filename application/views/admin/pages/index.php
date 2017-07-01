@@ -55,7 +55,7 @@
                             <i class="material-icons">add_shopping_cart</i>
                         </div>
                         <div class="content">
-                            <div class="text">Total vendidos</div>
+                            <div class="text">Total vendidos hoy</div>
                             <div class="number count-to" data-from="0" data-to="<?php echo $total_products;?>" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                             <i class="material-icons">trending_up</i>
                         </div>
                         <div class="content">
-                            <div class="text">+ Vendido</div>
+                            <div class="text">+ Vendido hoy</div>
                             <div>
                                 <?php 
                                     if (sizeof($product_array)>0) {
@@ -89,7 +89,7 @@
                             <i class="material-icons">person</i>
                         </div>
                         <div class="content">
-                            <div class="text">Mejor vendedor</div>
+                            <div class="text">Mejor vendedor hoy</div>
                             <div class="number">
                                 <?php 
                                     if (sizeof($employee_array)>0) {
