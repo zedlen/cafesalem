@@ -1,4 +1,11 @@
 var table_id=0;
+
+
+$('.js-exportable').DataTable({
+    dom: 'frtip',
+    responsive: true,    
+});
+
 function imprimir(){
 	if (table_id!=0) {
 		alertify.confirm('Cerrar ticket', '¿Seguro que desea finalizar este pedido? Una vez hecho esto no se podra editar el ticket', 
@@ -207,6 +214,8 @@ $(".foods").click(function() {
 				if (!cancel) {
 					var sub_prize=parseFloat($("#"+id).attr('prize'))			
 					var prize =sub_prize*parseInt(cant);
+					var nombreProducto=$("#"+id).attr('obj_name')
+					console.log(nombreProducto)
 					var producto=$("#"+id).attr('producto_id')
 					$.ajax({
 						type: "post",
@@ -225,7 +234,7 @@ $(".foods").click(function() {
 								var total=parseFloat($("#total_ticket").html())
 								total=total+prize
 								$("#total_ticket").html(total)
-								$("#ticket_datail").append("<tr><td>"+$("#"+id).attr('obj_name')+"</td><td id='cant_"+producto+"'>"+cant+"</td><td id='total_"+producto+"'>"+prize+"</td>"+
+								$("#ticket_datail").append("<tr><td>"+nombreProducto+"</td><td id='cant_"+producto+"'>"+cant+"</td><td id='total_"+producto+"'>"+prize+"</td>"+
 									"<td><button id='edit_button_"+producto+"' producto_id='"+id+"' type='button' class='btn btn-default' onclick='edit_ticket("+producto+")'>"+
 											"<span class='glyphicon glyphicon-edit'></span>"+
 									"</button></td></tr></tr>")							
@@ -249,68 +258,153 @@ $(".foods").click(function() {
 			}).set('type','number');		
 	}	
 })
-$(".drinks").click(function() {
+$("#save_drinks").click(function() {
 	if (table_id==0) {
 		  alertify.alert('Error','Seleccione una mesa primero')
 	}
 	else{
-		var cant=0
-		var cancel=false
-		var id=$(this).attr('id')
-		alertify.prompt( 
-			'Cantidad', 
-			'Ingrese cantidad', 
-			'', 
-			function(evt, value) { 
-				if (isInt(value)) {
-					cant=value;
-				} 
-				else{
-					cancel=true
-					alertify.alert('Error','Debes agregar la cantidad del producto')
-				}
-				if (!cancel) {
-					var sub_prize=parseFloat($("#"+id).attr('prize'))
-					var prize =sub_prize*parseInt(cant);
-					var producto=$("#"+id).attr('producto_id')
-					$.ajax({
-						type: "post",
-						url: base_url+'index.php/Welcome/apiConecction',
-						data:{
-						  url:'ticket/addTicketDetail',
-						  table_id:table_id,
-						  cant:cant,
-						  prize:prize,
-						  producto:producto
-						},
-						dataType: "json", 
-						success: function(response)
-						{
-							if (response.status) {
-								var total=parseFloat($("#total_ticket").html())
-								total=total+prize
-								$("#total_ticket").html(total)
-								$("#ticket_datail").append("<tr><td>"+$("#"+id).attr('obj_name')+"</td><td id='cant_"+producto+"'>"+cant+"</td><td id='total_"+producto+"'>"+prize+"</td>"+
-									"<td><button id='edit_button_"+producto+"' producto_id='"+producto+"' type='button' class='btn btn-default' onclick='edit_ticket("+producto+")'>"+
-											"<span class='glyphicon glyphicon-edit'></span>"+
-									"</button></td></tr></tr>")	
-							}
-							else{
-								alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+response.message);
-							}
-						},
-						failure:function(a,b,c) {
-						  alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+b);
-						},
-						error:function(a,b,c) {
-						  alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+b);
+		$('#drink_table').dataTable().fnDestroy()
+		$.each($(".check_select_drink"),function(index,value) {
+			var id=value.id;
+			console.log(id)
+			if ($("#"+id).is(':checked')) {
+				
+				var idProducto=$("#"+id).attr('producto_id')
+				var nombreProducto=$("#"+id).attr('obj_name')
+				console.log(nombreProducto)
+				var precio_unit=$("#"+id).attr('precio')
+				var cantidad=$("#cantidad_"+idProducto).val()
+				var precio=parseFloat(precio_unit)*parseInt(cantidad)
+				console.log(idProducto)
+				console.log(precio_unit)
+				console.log(cantidad)
+				console.log(precio)
+				$.ajax({
+					type: "post",
+					url: base_url+'index.php/Welcome/apiConecction',
+					data:{
+						url:'ticket/addTicketDetail',
+						table_id:table_id,
+						cant:cantidad,
+						prize:precio,
+						producto:idProducto
+					},
+					dataType: "json", 
+					success: function(response)
+					{						
+						console.log(response)
+						if (response.status) {
+							var total=parseFloat($("#total_ticket").html())
+							total=total+precio
+							$("#total_ticket").html(total)
+							$("#ticket_datail").append("<tr><td>"+nombreProducto+"</td><td id='cant_"+idProducto+"'>"+cantidad+"</td><td id='total_"+idProducto+"'>"+precio+"</td>"+
+								"<td><button id='edit_button_"+idProducto+"' producto_id='"+idProducto+"' type='button' class='btn btn-default' onclick='edit_ticket("+idProducto+")'>"+
+								"<span class='glyphicon glyphicon-edit'></span>"+
+								"</button></td></tr></tr>")							
 						}
-					})
-				}
-			}, 
-			function() { 
-				cancel=true;
-				alertify.alert('Error','Debes agregar la cantidad del producto')
-			}).set('type','number');		
+						else{
+							alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+response.message);
+						}
+					},
+					failure:function(a,b,c) {
+						alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+b);
+					},
+					error:function(a,b,c) {
+						alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+b);
+					}
+				})
+			}
+		})
+		$('#drink_table').dataTable().fnDraw()
+		$("#close_modal").trigger('click')
+							
 	}
 })
+
+$("#show_modal_food").click(function () {
+	$.each($(".check_select_food"),function(index,value) {	
+		var idProducto=	$("#"+value.id).attr('producto_id')
+		$("#"+value.id).prop('checked',false)
+		$("#cantidad_"+idProducto).val('')
+	})
+})
+
+$("#show_modal_drink").click(function () {
+	$.each($(".check_select_drink"),function(index,value) {		
+		var idProducto=	$("#"+value.id).attr('producto_id')
+		$("#"+value.id).prop('checked',false)
+		$("#cantidad_"+idProducto).val('')
+	})
+})
+
+function change_val(id){
+	console.log('change valor de '+id+' leido '+$(this).is(":checked"))	
+	if($("#select_producto_"+id).is(":checked")){
+		$("#cantidad_"+id).val(1)
+	}
+	else{
+		$("#cantidad_"+id).val('')
+	}
+}
+
+$("#save_food").click(function() {
+	if (table_id==0) {
+		  alertify.alert('Error','Seleccione una mesa primero')
+	}
+	else{
+		$('#food_table').dataTable().fnDestroy()
+		$.each($(".check_select_food"),function(index,value) {
+			var id=value.id;
+			console.log(id)
+			if ($("#"+id).is(':checked')) {
+				
+				var idProducto=$("#"+id).attr('producto_id')
+				var precio_unit=$("#"+id).attr('precio')
+				var cantidad=$("#cantidad_"+idProducto).val()
+				var precio=parseFloat(precio_unit)*parseInt(cantidad)
+				console.log(idProducto)
+				console.log(precio_unit)
+				console.log(cantidad)
+				console.log(precio)
+				$.ajax({
+					type: "post",
+					url: base_url+'index.php/Welcome/apiConecction',
+					data:{
+						url:'ticket/addTicketDetail',
+						table_id:table_id,
+						cant:cantidad,
+						prize:precio,
+						producto:idProducto
+					},
+					dataType: "json", 
+					success: function(response)
+					{						
+						console.log(response)
+						if (response.status) {
+							var total=parseFloat($("#total_ticket").html())
+							total=total+precio
+							$("#total_ticket").html(total)
+							$("#ticket_datail").append("<tr><td>"+$("#"+id).attr('obj_name')+"</td><td id='cant_"+idProducto+"'>"+cantidad+"</td><td id='total_"+idProducto+"'>"+precio+"</td>"+
+								"<td><button id='edit_button_"+idProducto+"' producto_id='"+idProducto+"' type='button' class='btn btn-default' onclick='edit_ticket("+idProducto+")'>"+
+								"<span class='glyphicon glyphicon-edit'></span>"+
+								"</button></td></tr></tr>")							
+						}
+						else{
+							alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+response.message);
+						}
+					},
+					failure:function(a,b,c) {
+						alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+b);
+					},
+					error:function(a,b,c) {
+						alertify.alert("Error","Error al agregar producto a ticket. <br> Error : "+b);
+					}
+				})
+			}
+		})
+		$('#food_table').dataTable().fnDraw()
+		$("#close_modal2").trigger('click')
+							
+	}
+})
+

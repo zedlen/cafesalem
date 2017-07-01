@@ -7,7 +7,7 @@
       if ($request->status) {
              foreach ($request->tables as $key => $value) {
                    echo "<input class='table_radio' type='radio' name='mesa' id='mesa1' value='$value->idMesa'>
-           Mesa No.$value->idMesa<br>";
+           Mesa No.$value->idMesa $value->Nombre<br>";
              }
          }   
      ?>  
